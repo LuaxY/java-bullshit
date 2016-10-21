@@ -4,6 +4,7 @@ import exception.BeurkExeption;
 import exception.CageException;
 import exception.DoorException;
 import model.*;
+import storage.JDBCImpl;
 import utils.Sweeper;
 
 import java.util.List;
@@ -20,11 +21,13 @@ public class ZooManager
 
     private List<Cage> cages;
     private Visitor[] vistors;
+    private JDBCImpl jdbc;
 
     private ZooManager()
     {
         cages = new Vector<>();
         vistors = new Visitor[Visitor.MAX_VISITOR];
+        jdbc = new JDBCImpl();
         init();
     }
 
