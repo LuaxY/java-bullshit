@@ -6,14 +6,14 @@ import exception.BeurkExeption;
  * Created by Luax on 20/10/2016.
  */
 
-public class TRex extends Dinosaur
+public class Lion extends Animal
 {
-    public TRex()
+    public Lion()
     {
-        super("TRex", 0, 0.0f);
+        super("Lion", 0, 0.0f);
     }
 
-    public TRex(String name, int age, float weight)
+    public Lion(String name, int age, float weight)
     {
         super(name, age, weight);
     }
@@ -44,9 +44,9 @@ public class TRex extends Dinosaur
 
     @Override
     @Deprecated
-    public void eat(Diplodocus diplodocus)
+    public void eat(Gazelle gazelle)
     {
-        addWeight(diplodocus.getWeight() / 3);
+        addWeight(gazelle.getWeight() / 3);
     }
 
     @Override

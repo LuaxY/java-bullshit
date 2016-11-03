@@ -4,14 +4,14 @@ package model;
  * Created by Luax on 20/10/2016.
  */
 
-public class Triceratops extends Dinosaur
+public class Monkey extends Animal
 {
-    public Triceratops()
+    public Monkey()
     {
-        super("Triceratops", 0, 0.0f);
+        super("Monkey", 0, 0.0f);
     }
 
-    public Triceratops(String name, int age, float weight)
+    public Monkey(String name, int age, float weight)
     {
         super(name, age, weight);
     }

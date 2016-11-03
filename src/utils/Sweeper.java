@@ -7,7 +7,7 @@ public abstract class Sweeper
 {
     public static void cleanTheFloor()
     {
-        // Appel du GC pour supprimer la Diplodocus et mise en pause pour que le GC passe par là
+        // Appel du GC pour supprimer l'animal mangé et mise en pause pour que le GC passe par là
         System.gc();
         try
         {

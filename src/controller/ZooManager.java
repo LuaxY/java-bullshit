@@ -43,17 +43,17 @@ public class ZooManager
         try
         {
             cage = new Cage(1, 1);
-            cage.getInDinausor(new TRex("TRex", 5, 200.3f));
+            cage.getInDinausor(new Lion("Lion", 5, 200.3f));
             cage.close();
             cages.add(cage);
 
             cage = new Cage(2, 2);
-            cage.getInDinausor(new Triceratops("Triceraptos", 10, 35.8f));
+            cage.getInDinausor(new Monkey("Monkey", 10, 35.8f));
             cage.close();
             cages.add(cage);
 
             cage = new Cage(3, 3);
-            cage.getInDinausor(new Diplodocus("Diplodocus", 4, 56.6f, 20));
+            cage.getInDinausor(new Gazelle("Gazelle", 4, 56.6f, 20));
             cage.close();
             cages.add(cage);
         }
@@ -116,7 +116,7 @@ public class ZooManager
     {
         for (Cage cage : cages)
         {
-            Dinosaur occupant = cage.getOccupant();
+            Animal occupant = cage.getOccupant();
             if (occupant != null) System.out.println(occupant.yell());
         }
     }
@@ -126,8 +126,8 @@ public class ZooManager
         Cage eaterCage = cages.get(eaterIndex);
         Cage eatedCage = cages.get(eatedIndex);
 
-        Dinosaur eater = eaterCage.getOccupant();
-        Dinosaur eated = null; //eatedCage.getOccupant();
+        Animal eater = eaterCage.getOccupant();
+        Animal eated = null; //eatedCage.getOccupant();
 
         String result = "";
         StringJoiner stringJoiner = null;

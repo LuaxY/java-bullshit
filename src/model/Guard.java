@@ -40,7 +40,7 @@ public class Guard extends Person
     }
 
     @Override
-    public void eat(Diplodocus diplodocus)
+    public void eat(Gazelle gazelle)
     {
 
     }

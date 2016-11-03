@@ -58,7 +58,7 @@ public class Visitor extends Person
 
     @Override
     @Deprecated
-    public void eat(Diplodocus diplodocus)
+    public void eat(Gazelle gazelle)
     {
 
     }

@@ -12,7 +12,7 @@ import java.util.StringJoiner;
 
 public class Cage implements Serializable
 {
-    private Dinosaur occupant;
+    private Animal occupant;
     private boolean isOpen;
     private int positionX;
     private int positionY;
@@ -62,7 +62,7 @@ public class Cage implements Serializable
         return stringJoiner.toString();
     }
 
-    public void getInDinausor(Dinosaur dinosaur) throws CageException, DoorException
+    public void getInDinausor(Animal animal) throws CageException, DoorException
     {
         if (occupant != null)
         {
@@ -74,19 +74,19 @@ public class Cage implements Serializable
             throw new DoorException();
         }
 
-        occupant = dinosaur;
+        occupant = animal;
     }
 
-    public Dinosaur getOutDinosaur() throws DoorException
+    public Animal getOutDinosaur() throws DoorException
     {
         if (!isOpen)
         {
             throw new DoorException();
         }
 
-        Dinosaur dinosaurTransfert = occupant;
+        Animal animalTransfert = occupant;
         occupant = null;
-        return dinosaurTransfert;
+        return animalTransfert;
     }
 
     public void open()
@@ -117,7 +117,7 @@ public class Cage implements Serializable
         return occupant == null;
     }
 
-    public Dinosaur getOccupant()
+    public Animal getOccupant()
     {
         return occupant;
     }

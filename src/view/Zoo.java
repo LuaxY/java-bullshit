@@ -33,10 +33,10 @@ public class Zoo
 
         jurassicPark.entertainment();
 
-        // la Diplodocus (2) mange le TRex (0)
+        // la Gazelle (2) mange le Lion (0)
         jurassicPark.eat(2, 0);
 
-        // le TRex (0) mange la Diplodocus (2)
+        // le Lion (0) mange la Gazelle (2)
         jurassicPark.eat(0, 2);
 
         // le Singe (1) ce mange lui même

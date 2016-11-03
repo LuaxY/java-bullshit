@@ -26,7 +26,7 @@ public interface Individu
     // --------------------------------
 
     @Deprecated
-    public default void eat(Diplodocus diplodocus) throws BeurkExeption
+    public default void eat(Gazelle gazelle) throws BeurkExeption
     {
         throw new BeurkExeption();
     }

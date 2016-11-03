@@ -4,17 +4,17 @@ package model;
  * Created by Luax on 20/10/2016.
  */
 
-public class Diplodocus extends Dinosaur implements Eatable
+public class Gazelle extends Animal implements Eatable
 {
     int hornSize;
 
-    public Diplodocus()
+    public Gazelle()
     {
-        super("Diplodocus", 0, 0.0f);
+        super("Gazelle", 0, 0.0f);
         setHornSize(0);
     }
 
-    public Diplodocus(String name, int age, float weight, int hornSize)
+    public Gazelle(String name, int age, float weight, int hornSize)
     {
         super(name, age, weight);
         setHornSize(hornSize);
