@@ -2,5 +2,13 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="/Applications/IntelliJ IDEA 2016.3 EAP.app/Contents/lib/groovy-all-2.4.6.jar"/>
+	<classpathentry kind="lib" path="/Applications/IntelliJ IDEA 2016.3 EAP.app/Contents/lib/junit-4.12.jar"/>
+	<classpathentry kind="lib" path="/Applications/IntelliJ IDEA 2016.3 EAP.app/Contents/plugins/junit/lib/junit-jupiter-api-5.0.0-M2.jar"/>
+	<classpathentry kind="lib" path="/Applications/IntelliJ IDEA 2016.3 EAP.app/Contents/plugins/junit/lib/junit-jupiter-api-5.0.0-M2.jar"/>
+	<classpathentry kind="lib" path="/Applications/IntelliJ IDEA 2016.3 EAP.app/Contents/plugins/testng/lib/testng.jar"/>
+	<classpathentry kind="var" path="APPLICATION_HOME_DIR/lib/junit.jar"/>
+	<classpathentry kind="var" path="APPLICATION_HOME_DIR/lib/junit.jar"/>
+	<classpathentry kind="var" path="USER_HOME/Downloads/mysql-connector-java-5.1.40/mysql-connector-java-5.1.40-bin.jar"/>
 	<classpathentry kind="output" path="out/production/untitled"/>
 </classpath>

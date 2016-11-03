@@ -4,8 +4,13 @@ import exception.BeurkExeption;
 import exception.CageException;
 import exception.DoorException;
 import model.*;
+import service.CagePOJO;
+import storage.Dao;
+import storage.DaoFactory;
+import storage.DaoType;
 import storage.JDBCImpl;
-import utils.Sweeper;
+import util.CageConverter;
+import util.Sweeper;
 
 import java.util.List;
 import java.util.StringJoiner;
@@ -21,13 +26,14 @@ public class ZooManager
 
     private List<Cage> cages;
     private Visitor[] vistors;
-    private JDBCImpl jdbc;
+    private Dao<?> dao;
 
     private ZooManager()
     {
         cages = new Vector<>();
         vistors = new Visitor[Visitor.MAX_VISITOR];
-        jdbc = new JDBCImpl();
+        dao = DaoFactory.getInstance().getDao(DaoType.JDBC);
+
         init();
     }
 
@@ -38,32 +44,11 @@ public class ZooManager
 
     private void init()
     {
-        Cage cage = null;
+        List<CagePOJO> cagePOJOs = (List<CagePOJO>) dao.readAll();
 
-        try
+        for (CagePOJO cagePOJO : cagePOJOs)
         {
-            cage = new Cage(1, 1);
-            cage.getInDinausor(new Lion("Lion", 5, 200.3f));
-            cage.close();
-            cages.add(cage);
-
-            cage = new Cage(2, 2);
-            cage.getInDinausor(new Monkey("Monkey", 10, 35.8f));
-            cage.close();
-            cages.add(cage);
-
-            cage = new Cage(3, 3);
-            cage.getInDinausor(new Gazelle("Gazelle", 4, 56.6f, 20));
-            cage.close();
-            cages.add(cage);
-        }
-        catch (CageException e)
-        {
-            e.printStackTrace();
-        }
-        catch (DoorException e)
-        {
-            e.printStackTrace();
+            cages.add(CageConverter.convert(cagePOJO));
         }
     }
 
@@ -140,7 +125,7 @@ public class ZooManager
             {
                 // Open cage, get dino, close cage of eated
                 eatedCage.open();
-                eated = eatedCage.getOutDinosaur();
+                eated = eatedCage.getOutAnimal();
                 eatedCage.close();
 
                 if (eated instanceof Eatable)
@@ -158,11 +143,11 @@ public class ZooManager
                 {
                     // Return eated to his chage
                     eatedCage.open();
-                    eatedCage.getInDinausor(eated);
+                    eatedCage.getInAnimal(eated);
                     eatedCage.close();
 
                     stringJoiner.add(eater.getName());
-                    stringJoiner.add("ne veux pas manger");
+                    stringJoiner.add("ne veut pas manger");
                     stringJoiner.add(eated.getName());
                 }
             }
@@ -172,7 +157,7 @@ public class ZooManager
                 {
                     // Return eated to his chage
                     eatedCage.open();
-                    eatedCage.getInDinausor(eated);
+                    eatedCage.getInAnimal(eated);
                     eatedCage.close();
                 }
                 catch (CageException e1)

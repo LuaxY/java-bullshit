@@ -29,7 +29,7 @@ public class Zoo
 
         System.out.println("Le parc comporte " + jurassicPark.getNumberOfVisitor() + " visiteurs");
 
-        System.out.println("Les visiteur passent devant les cages");
+        System.out.println("Les visiteurs passent devant les cages");
 
         jurassicPark.entertainment();
 
@@ -50,6 +50,9 @@ public class Zoo
         jurassicPark.out();
 
         System.out.println("Le parc comporte " + jurassicPark.getNumberOfVisitor() + " visiteurs");
+
+        //Cage cage = CageConverter.convert();
+        //stem.out.println(cage);
     }
 
     public Zoo()

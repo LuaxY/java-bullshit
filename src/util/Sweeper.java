@@ -1,8 +1,9 @@
-package utils;
+package util;
 
 /**
  * Created by Luax on 21/10/2016.
  */
+
 public abstract class Sweeper
 {
     public static void cleanTheFloor()

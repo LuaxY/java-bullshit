@@ -62,7 +62,7 @@ public class Cage implements Serializable
         return stringJoiner.toString();
     }
 
-    public void getInDinausor(Animal animal) throws CageException, DoorException
+    public void getInAnimal(Animal animal) throws CageException, DoorException
     {
         if (occupant != null)
         {
@@ -77,7 +77,7 @@ public class Cage implements Serializable
         occupant = animal;
     }
 
-    public Animal getOutDinosaur() throws DoorException
+    public Animal getOutAnimal() throws DoorException
     {
         if (!isOpen)
         {
