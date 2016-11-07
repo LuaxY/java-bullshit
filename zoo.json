@@ -1,0 +1,28 @@
+{
+  "cages": [
+    {
+      "x": 1,
+      "y": 2,
+      "codeAnimal": "Lion",
+      "nom": "Leon",
+      "age": 10,
+      "poids": 170.1
+    },
+    {
+      "x": 3,
+      "y": 4,
+      "codeAnimal": "Monkey",
+      "nom": "Harambe",
+      "age": 6,
+      "poids": 35.8
+    },
+    {
+      "x": 5,
+      "y": 6,
+      "codeAnimal": "Gazelle",
+      "nom": "Leon",
+      "age": 3,
+      "poids": 56.6
+    }
+  ]
+}

@@ -1,14 +1,16 @@
 package storage;
 
-import model.Cage;
-import model.Gazelle;
-import model.Lion;
-import model.Monkey;
+import org.json.simple.parser.ParseException;
 import service.CagePOJO;
-import service.GazellePOJO;
-
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONArray;
 
 /**
  * Created by Luax on 03/11/2016.
@@ -19,7 +21,8 @@ public class HardImpl implements Dao<CagePOJO>
     @Override
     public CagePOJO read(int id)
     {
-        return null;
+        List<CagePOJO> cagePOJOs = readAll();
+        return cagePOJOs.get(id);
     }
 
     @Override
@@ -28,38 +31,45 @@ public class HardImpl implements Dao<CagePOJO>
         List<CagePOJO> cagePOJOs = new Vector<>();
         CagePOJO cagePOJO = null;
 
-        cagePOJO = new CagePOJO();
-        cagePOJO.setIdAnimal(0);
-        cagePOJO.setX(0);
-        cagePOJO.setY(0);
-        cagePOJO.setCodeAnimal("Lion");
-        cagePOJO.setNom("Leon");
-        cagePOJO.setAge(10);
-        cagePOJO.setPoids(70.4f);
-        cagePOJOs.add(cagePOJO);
+        try
+        {
+            JSONParser parser = new JSONParser();
+            JSONObject object = (JSONObject) parser.parse(new FileReader("zoo.json"));
+            JSONArray cages = (JSONArray) object.get("cages");
+            Iterator<JSONObject> iterator = cages.iterator();
 
-        cagePOJO = new CagePOJO();
-        cagePOJO.setIdAnimal(1);
-        cagePOJO.setX(1);
-        cagePOJO.setY(1);
-        cagePOJO.setCodeAnimal("Monkey");
-        cagePOJO.setNom("Harambe");
-        cagePOJO.setAge(7);
-        cagePOJO.setPoids(200.8f);
-        cagePOJOs.add(cagePOJO);
+            int key = 0;
 
-        cagePOJO = new CagePOJO();
-        cagePOJO.setIdAnimal(2);
-        cagePOJO.setX(2);
-        cagePOJO.setY(2);
-        cagePOJO.setCodeAnimal("Gazelle");
-        cagePOJO.setNom("Speedy");
-        cagePOJO.setAge(4);
-        cagePOJO.setPoids(37.2f);
-        GazellePOJO gazellePOJO = new GazellePOJO();
-        gazellePOJO.setLgCorne(4);
-        cagePOJO.setGazelle(gazellePOJO);
-        cagePOJOs.add(cagePOJO);
+            while (iterator.hasNext())
+            {
+                JSONObject cage = iterator.next();
+
+                cagePOJO = new CagePOJO();
+                cagePOJO.setIdAnimal(key);
+                cagePOJO.setX(Math.toIntExact((Long) cage.get("x")));
+                cagePOJO.setY(Math.toIntExact((Long) cage.get("y")));
+                cagePOJO.setCodeAnimal((String) cage.get("codeAnimal"));
+                cagePOJO.setNom((String) cage.get("nom"));
+                cagePOJO.setAge(Math.toIntExact((Long) cage.get("age")));
+                cagePOJO.setPoids((double) cage.get("poids"));
+
+                cagePOJOs.add(cagePOJO);
+
+                key++;
+            }
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+        catch (ParseException e)
+        {
+            e.printStackTrace();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
 
         return cagePOJOs;
     }
@@ -77,7 +87,7 @@ public class HardImpl implements Dao<CagePOJO>
     }
 
     @Override
-    public void store(CagePOJO object)
+    public void insert(CagePOJO object)
     {
 
     }

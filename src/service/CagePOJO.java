@@ -1,18 +1,38 @@
 package service;
 
+import javax.persistence.*;
+
 /**
  * Created by Luax on 03/11/2016.
  */
 
+@Entity
+@Table(name = "animal")
+@NamedQueries({
+    @NamedQuery(name = "all",  query = "SELECT cage FROM CagePOJO as cage"),
+    @NamedQuery(name = "find", query = "SELECT cage FROM CagePOJO as cage WHERE cage.idAnimal = :key"),
+})
+
 public class CagePOJO
 {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int idAnimal; // primary key
+
     private int x;
+
     private int y;
+
     private String codeAnimal;
+
     private String nom;
+
     private int age;
+
     private float poids;
+
+    @OneToOne
+    @JoinColumn(referencedColumnName = "idAnimal", name = "idAnimal", updatable = false, insertable = false)
     private GazellePOJO gazelle;
 
     public CagePOJO()
@@ -84,9 +104,9 @@ public class CagePOJO
         return poids;
     }
 
-    public void setPoids(float poids)
+    public void setPoids(double poids)
     {
-        this.poids = poids;
+        this.poids = (float) poids;
     }
 
     public GazellePOJO getGazelle()

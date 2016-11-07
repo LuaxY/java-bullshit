@@ -46,19 +46,19 @@ public class Lion extends Animal
     @Deprecated
     public void eat(Gazelle gazelle)
     {
-        addWeight(gazelle.getWeight() / 3);
+        addWeight(gazelle.getWeight() / 3.0f);
     }
 
     @Override
     @Deprecated
     public void eat(Individu individu)
     {
-        //addWeight(individu.getWeight() / 3);
+        //addWeight(individu.getWeight() / 3.0f);
     }
 
     @Override
     public void eat(Eatable eatable) throws BeurkExeption
     {
-        addWeight(eatable.getWeight() / 3);
+        addWeight(eatable.getWeight() / 3.0f);
     }
 }

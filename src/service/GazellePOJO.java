@@ -1,14 +1,22 @@
 package service;
 
+import javax.persistence.*;
+
 /**
  * Created by Luax on 03/11/2016.
  */
 
+@Entity
+@Table(name = "gazelle")
 public class GazellePOJO
 {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id; // primary key
+
     private int idAnimal;
-    private int lgCorne;
+
+    private int lgCornes;
 
     public GazellePOJO()
     {
@@ -34,13 +42,13 @@ public class GazellePOJO
         this.idAnimal = idAnimal;
     }
 
-    public int getLgCorne()
+    public int getLgCornes()
     {
-        return lgCorne;
+        return lgCornes;
     }
 
-    public void setLgCorne(int lgCorne)
+    public void setLgCornes(int lgCornes)
     {
-        this.lgCorne = lgCorne;
+        this.lgCornes = lgCornes;
     }
 }

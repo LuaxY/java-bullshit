@@ -26,6 +26,11 @@ public abstract class CageConverter
         Class<?> types[] = null;
         Object values[] = null;
 
+        if (cagePOJO == null)
+        {
+            return null;
+        }
+
         cage = new Cage(cagePOJO.getX(), cagePOJO.getY());
 
         if (cagePOJO.getCodeAnimal() != null)
@@ -36,7 +41,7 @@ public abstract class CageConverter
                 values = new Object[4];
 
                 types[3]  = int.class;
-                values[3] = cagePOJO.getGazelle().getLgCorne();
+                values[3] = 0; //cagePOJO.getGazelle().getLgCornes();
             }
             else
             {
@@ -50,7 +55,7 @@ public abstract class CageConverter
 
             values[0] = cagePOJO.getNom();
             values[1] = cagePOJO.getAge();
-            values[2] = cagePOJO.getAge();
+            values[2] = cagePOJO.getPoids();
 
             try
             {

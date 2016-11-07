@@ -7,9 +7,6 @@ import model.*;
 import service.CagePOJO;
 import storage.Dao;
 import storage.DaoFactory;
-import storage.DaoType;
-import storage.JDBCImpl;
-import util.CageConverter;
 import util.Sweeper;
 
 import java.util.List;
@@ -24,15 +21,13 @@ public class ZooManager
 {
     private static ZooManager instance = new ZooManager();
 
-    private List<Cage> cages;
+    private List<ManagedCage> cages;
     private Visitor[] vistors;
-    private Dao<?> dao;
 
     private ZooManager()
     {
         cages = new Vector<>();
         vistors = new Visitor[Visitor.MAX_VISITOR];
-        dao = DaoFactory.getInstance().getDao(DaoType.JDBC);
 
         init();
     }
@@ -44,11 +39,13 @@ public class ZooManager
 
     private void init()
     {
+        DaoFactory daoFactory = DaoFactory.getInstance();
+        Dao<CagePOJO> dao = (Dao<CagePOJO>) daoFactory.getDao();
         List<CagePOJO> cagePOJOs = (List<CagePOJO>) dao.readAll();
 
         for (CagePOJO cagePOJO : cagePOJOs)
         {
-            cages.add(CageConverter.convert(cagePOJO));
+            cages.add(new ManagedCage(cagePOJO.getIdAnimal(), dao));
         }
     }
 
@@ -80,7 +77,7 @@ public class ZooManager
 
         int dinosaurCounter = 0;
 
-        for (Cage cage : cages)
+        for (ManagedCage cage : cages)
         {
             displayDinosaursList[dinosaurCounter] = cage.toString();
             dinosaurCounter++;
@@ -91,7 +88,7 @@ public class ZooManager
 
     public void feed()
     {
-        for (Cage cage : cages)
+        for (ManagedCage cage : cages)
         {
             cage.feed();
         }
@@ -99,7 +96,7 @@ public class ZooManager
 
     public void entertainment()
     {
-        for (Cage cage : cages)
+        for (ManagedCage cage : cages)
         {
             Animal occupant = cage.getOccupant();
             if (occupant != null) System.out.println(occupant.yell());
@@ -108,8 +105,8 @@ public class ZooManager
 
     public String eat(int eaterIndex, int eatedIndex)
     {
-        Cage eaterCage = cages.get(eaterIndex);
-        Cage eatedCage = cages.get(eatedIndex);
+        ManagedCage eaterCage = cages.get(eaterIndex);
+        ManagedCage eatedCage = cages.get(eatedIndex);
 
         Animal eater = eaterCage.getOccupant();
         Animal eated = null; //eatedCage.getOccupant();

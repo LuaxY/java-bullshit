@@ -18,7 +18,7 @@ public class JDBCImplTest extends TestCase
         CagePOJO cagePOJO = jdbc.read(2);
 
         assertEquals("GAGAG", cagePOJO.getNom());
-        assertEquals(34, cagePOJO.getGazelle().getLgCorne());
+        assertEquals(34, cagePOJO.getGazelle().getLgCornes());
     }
 
     public void testReadAll() throws Exception
@@ -28,6 +28,26 @@ public class JDBCImplTest extends TestCase
 
         assertEquals(5, cagePOJOs.size());
         assertEquals("clarence", cagePOJOs.get(0).getNom());
+    }
+
+    public void testUpdate() throws Exception
+    {
+        CagePOJO before = null;
+        float weight = 0;
+
+        JDBCImpl jdbc = new JDBCImpl();
+
+        before = jdbc.read(1);
+        weight = before.getPoids();
+        //assertEquals(172.3f, before.getPoids(), 0.0); // not sure about the weight in DB
+        before.setPoids(175.4f);
+        jdbc.update(before);
+        before = jdbc.read(1);
+        assertEquals(175.4f, before.getPoids());
+        before.setPoids(170.4f);
+        jdbc.update(before);
+        before = jdbc.read(1);
+        assertEquals(170.4f, before.getPoids());
     }
 
 }

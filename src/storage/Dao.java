@@ -17,5 +17,5 @@ public interface Dao<T>
 
     public void delete(T object);
 
-    public void store(T object);
+    public void insert(T object);
 }

@@ -2,11 +2,10 @@ package storage;
 
 //import com.mysql.jdbc.Connection;
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.StringJoiner;
 import java.util.Vector;
 
-import model.Gazelle;
 import service.CagePOJO;
 import service.GazellePOJO;
 
@@ -68,7 +67,7 @@ public class JDBCImpl implements Dao<CagePOJO>
                     {
                         gazellePOJO = new GazellePOJO();
                         gazellePOJO.setId(result.getInt("id"));
-                        gazellePOJO.setLgCorne(result.getInt("lgCornes"));
+                        gazellePOJO.setLgCornes(result.getInt("lgCornes"));
 
                         cagePOJO.setGazelle(gazellePOJO);
                     }
@@ -91,7 +90,6 @@ public class JDBCImpl implements Dao<CagePOJO>
 
         try
         {
-            connection.createStatement();
             Statement statement = connection.createStatement();
             result = statement.executeQuery("SELECT * FROM animal as a LEFT JOIN gazelle as g on a.idAnimal = g.idAnimal WHERE a.idAnimal = " + id);
 
@@ -116,7 +114,6 @@ public class JDBCImpl implements Dao<CagePOJO>
 
         try
         {
-            connection.createStatement();
             Statement statement = connection.createStatement();
             ResultSet result = statement.executeQuery("SELECT * FROM animal as a LEFT JOIN gazelle as g on a.idAnimal = g.idAnimal ORDER BY a.idAnimal");
 
@@ -138,7 +135,21 @@ public class JDBCImpl implements Dao<CagePOJO>
     @Override
     public void update(CagePOJO object)
     {
+        try
+        {
+            StringJoiner query = new StringJoiner(", ", "UPDATE animal SET ", " WHERE idAnimal = " + object.getIdAnimal() + ";");
+            query.add("codeAnimal = '" + object.getCodeAnimal() + "'");
+            query.add("nom = '" + object.getNom() + "'");
+            query.add("age = " + object.getAge());
+            query.add("poids = " + object.getPoids());
 
+            Statement statement = connection.createStatement();
+            Boolean result = statement.execute(query.toString());
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -148,7 +159,7 @@ public class JDBCImpl implements Dao<CagePOJO>
     }
 
     @Override
-    public void store(CagePOJO object)
+    public void insert(CagePOJO object)
     {
 
     }
